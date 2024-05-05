@@ -1,0 +1,126 @@
+services:
+  employee-service:
+    build: employee-service
+    hostname: employee-service
+    ports:
+      - "7002:7002"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      mysql2:
+        condition: service_healthy
+
+  mysql2:
+    image: mysql:5.7
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpwd
+      - MYSQL_DATABASE=employee-db
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=pwd
+    volumes:
+      - ./data/mysql2:/var/lib/mysql2
+      - ./data/init.d:/docker-entrypoint-initdb.d
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-uuser",
+          "-ppwd",
+          "-h",
+          "localhost",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  customer-service:
+    build: customer-service
+    hostname: customer-service
+    # REMOVE THOSE ONCE API GATEWAY IS CREATED
+    ports:
+      - "7001:7001"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      mysql1:
+        condition: service_healthy
+
+  mysql1:
+    image: mysql:5.7
+    ports:
+      - "3309:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpwd
+      - MYSQL_DATABASE=customer-db
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=pwd
+    volumes:
+      - ./data/mysql1:/var/lib/mysql1
+      - ./data/init.d:/docker-entrypoint-initdb.d
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-uuser",
+          "-ppwd",
+          "-h",
+          "localhost",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  product-service:
+    build: product-service
+    hostname: product-service
+    ports:
+      - "7003:7003"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      mysql3:
+        condition: service_healthy
+
+  mysql3:
+    image: mysql:5.7
+    ports:
+      - "3308:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpwd
+      - MYSQL_DATABASE=product-db
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=pwd
+    volumes:
+      - ./data/mysql3:/var/lib/mysql3
+      - ./data/init.d:/docker-entrypoint-initdb.d
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-uuser",
+          "-ppwd",
+          "-h",
+          "localhost",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  phpmyadmin1:
+    image: phpmyadmin:5.2.0
+    container_name: PhpMyAdminCustomer
+    links:
+      - mysql1
+    restart: always
+    ports:
+      - 5013:80
+    environment:
+      - PMA_ARBITRARY=1
