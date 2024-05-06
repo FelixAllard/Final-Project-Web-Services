@@ -1,21 +1,21 @@
 package org.champqcsoft.transactionservice.buisnesslayer;
 
-import com.example.GroceryStoreApp.commons.enums.Currency;
-import com.example.GroceryStoreApp.commons.enums.Price;
-import com.example.GroceryStoreApp.commons.identifiers.ClientIdentifier;
-import com.example.GroceryStoreApp.commons.identifiers.EmployeeIdentifier;
-import com.example.GroceryStoreApp.commons.identifiers.ProductIdentifier;
-import com.example.GroceryStoreApp.commons.identifiers.PurchaseReceiptIdentifier;
+import org.champqcsoft.transactionservice.commons.enums.Currency;
+import org.champqcsoft.transactionservice.commons.enums.Price;
+import org.champqcsoft.transactionservice.commons.identifiers.ClientIdentifier;
+import org.champqcsoft.transactionservice.commons.identifiers.EmployeeIdentifier;
+import org.champqcsoft.transactionservice.commons.identifiers.ProductIdentifier;
+import org.champqcsoft.transactionservice.commons.identifiers.PurchaseReceiptIdentifier;
 import com.example.GroceryStoreApp.subdomains.clientmanagementsubdomain.dataaccesslayer.ClientRepository;
 import com.example.GroceryStoreApp.subdomains.employeesmanagementsubdomains.dataaccesslayer.EmployeeRepository;
 import com.example.GroceryStoreApp.subdomains.productsmanagementsubdomain.dataaccesslayer.ProductRepository;
-import com.example.GroceryStoreApp.subdomains.transactionsmanagementsubdomain.dataaccesslayer.*;
-import com.example.GroceryStoreApp.subdomains.transactionsmanagementsubdomain.datamapperlayer.PurchaseReceiptRequestMapper;
-import com.example.GroceryStoreApp.subdomains.transactionsmanagementsubdomain.datamapperlayer.PurchaseReceiptResponseMapper;
-import com.example.GroceryStoreApp.subdomains.transactionsmanagementsubdomain.presentationlayer.PurchaseReceiptRequestModel;
-import com.example.GroceryStoreApp.subdomains.transactionsmanagementsubdomain.presentationlayer.PurchaseReceiptResponseModel;
-import com.example.GroceryStoreApp.utils.exceptions.InvalidInputException;
-import com.example.GroceryStoreApp.utils.exceptions.NotFoundException;
+import org.champqcsoft.transactionservice.dataaccesslayer.*;
+import org.champqcsoft.transactionservice.datamapperlayer.PurchaseReceiptRequestMapper;
+import org.champqcsoft.transactionservice.datamapperlayer.PurchaseReceiptResponseMapper;
+import org.champqcsoft.transactionservice.presentationlayer.PurchaseReceiptRequestModel;
+import org.champqcsoft.transactionservice.presentationlayer.PurchaseReceiptResponseModel;
+import org.champqcsoft.transactionservice.utils.exceptions.InvalidInputException;
+import org.champqcsoft.transactionservice.utils.exceptions.NotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 

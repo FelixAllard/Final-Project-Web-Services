@@ -2,8 +2,8 @@ package org.champqcsoft.transactionservice.buisnesslayer;
 
 
 
-import com.example.GroceryStoreApp.subdomains.transactionsmanagementsubdomain.presentationlayer.PurchaseReceiptRequestModel;
-import com.example.GroceryStoreApp.subdomains.transactionsmanagementsubdomain.presentationlayer.PurchaseReceiptResponseModel;
+import org.champqcsoft.transactionservice.presentationlayer.PurchaseReceiptRequestModel;
+import org.champqcsoft.transactionservice.presentationlayer.PurchaseReceiptResponseModel;
 
 import java.util.List;
 

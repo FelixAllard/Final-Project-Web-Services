@@ -1,11 +1,12 @@
 package org.champqcsoft.transactionservice.dataaccesslayer;
 
 
-import com.example.GroceryStoreApp.commons.enums.Price;
-import com.example.GroceryStoreApp.commons.identifiers.ClientIdentifier;
-import com.example.GroceryStoreApp.commons.identifiers.EmployeeIdentifier;
-import com.example.GroceryStoreApp.commons.identifiers.ProductIdentifier;
-import com.example.GroceryStoreApp.commons.identifiers.PurchaseReceiptIdentifier;
+import jakarta.persistence.*;
+import org.champqcsoft.transactionservice.commons.enums.Price;
+import org.champqcsoft.transactionservice.commons.identifiers.ClientIdentifier;
+import org.champqcsoft.transactionservice.commons.identifiers.EmployeeIdentifier;
+import org.champqcsoft.transactionservice.commons.identifiers.ProductIdentifier;
+import org.champqcsoft.transactionservice.commons.identifiers.PurchaseReceiptIdentifier;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

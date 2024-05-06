@@ -1,14 +1,14 @@
 package org.champqcsoft.transactionservice.datamapperlayer;
 
-import com.example.GroceryStoreApp.commons.enums.Price;
-import com.example.GroceryStoreApp.commons.identifiers.ClientIdentifier;
-import com.example.GroceryStoreApp.commons.identifiers.EmployeeIdentifier;
-import com.example.GroceryStoreApp.commons.identifiers.ProductIdentifier;
-import com.example.GroceryStoreApp.commons.identifiers.PurchaseReceiptIdentifier;
-import com.example.GroceryStoreApp.subdomains.transactionsmanagementsubdomain.dataaccesslayer.CurrentDate;
-import com.example.GroceryStoreApp.subdomains.transactionsmanagementsubdomain.dataaccesslayer.PurchaseReceipt;
-import com.example.GroceryStoreApp.subdomains.transactionsmanagementsubdomain.dataaccesslayer.StoreAddress;
-import com.example.GroceryStoreApp.subdomains.transactionsmanagementsubdomain.presentationlayer.PurchaseReceiptRequestModel;
+import org.champqcsoft.transactionservice.commons.enums.Price;
+import org.champqcsoft.transactionservice.commons.identifiers.ClientIdentifier;
+import org.champqcsoft.transactionservice.commons.identifiers.EmployeeIdentifier;
+import org.champqcsoft.transactionservice.commons.identifiers.ProductIdentifier;
+import org.champqcsoft.transactionservice.commons.identifiers.PurchaseReceiptIdentifier;
+import org.champqcsoft.transactionservice.dataaccesslayer.CurrentDate;
+import org.champqcsoft.transactionservice.dataaccesslayer.PurchaseReceipt;
+import org.champqcsoft.transactionservice.dataaccesslayer.StoreAddress;
+import org.champqcsoft.transactionservice.presentationlayer.PurchaseReceiptRequestModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
