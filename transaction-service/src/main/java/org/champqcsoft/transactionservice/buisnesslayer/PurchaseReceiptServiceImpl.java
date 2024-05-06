@@ -12,6 +12,9 @@ import com.example.GroceryStoreApp.subdomains.productsmanagementsubdomain.dataac
 import org.champqcsoft.transactionservice.dataaccesslayer.*;
 import org.champqcsoft.transactionservice.datamapperlayer.PurchaseReceiptRequestMapper;
 import org.champqcsoft.transactionservice.datamapperlayer.PurchaseReceiptResponseMapper;
+import org.champqcsoft.transactionservice.domainclientlayer.customers.CustomerServiceClient;
+import org.champqcsoft.transactionservice.domainclientlayer.employees.EmployeeServiceClient;
+import org.champqcsoft.transactionservice.domainclientlayer.products.ProductServiceClient;
 import org.champqcsoft.transactionservice.presentationlayer.PurchaseReceiptRequestModel;
 import org.champqcsoft.transactionservice.presentationlayer.PurchaseReceiptResponseModel;
 import org.champqcsoft.transactionservice.utils.exceptions.InvalidInputException;
@@ -26,15 +29,15 @@ import java.util.List;
 public class PurchaseReceiptServiceImpl implements PurchaseReceiptService{
     private final PurchaseReceiptRepository purchaseReceiptRepository;
     //To access database of those 3 repository
-    private final ClientRepository clientRepository;
-    private final ProductRepository productRepository;
-    private final EmployeeRepository employeeRepository;
+    private final CustomerServiceClient clientRepository;
+    private final EmployeeServiceClient productRepository;
+    private final ProductServiceClient employeeRepository;
 
 
     private final PurchaseReceiptResponseMapper purchaseReceiptResponseMapper;
     private final PurchaseReceiptRequestMapper purchaseReceiptRequestMapper;
 
-    public PurchaseReceiptServiceImpl(PurchaseReceiptRepository purchaseReceiptRepository, ClientRepository clientRepository, ProductRepository productRepository, EmployeeRepository employeeRepository,
+    public PurchaseReceiptServiceImpl(PurchaseReceiptRepository purchaseReceiptRepository, CustomerServiceClient clientRepository, EmployeeServiceClient productRepository, ProductServiceClient employeeRepository,
                                       PurchaseReceiptResponseMapper purchaseReceiptResponseMapper,
                                       PurchaseReceiptRequestMapper purchaseReceiptRequestMapper) {
         this.purchaseReceiptRepository = purchaseReceiptRepository;
