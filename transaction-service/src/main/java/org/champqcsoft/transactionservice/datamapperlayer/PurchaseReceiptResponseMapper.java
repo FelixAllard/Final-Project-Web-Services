@@ -1,11 +1,11 @@
 package org.champqcsoft.transactionservice.datamapperlayer;
 
-import com.example.GroceryStoreApp.subdomains.clientmanagementsubdomain.dataaccesslayer.Client;
-import com.example.GroceryStoreApp.subdomains.employeesmanagementsubdomains.dataaccesslayer.Employee;
-import com.example.GroceryStoreApp.subdomains.productsmanagementsubdomain.dataaccesslayer.Product;
-import com.example.GroceryStoreApp.subdomains.transactionsmanagementsubdomain.dataaccesslayer.PurchaseReceipt;
-import com.example.GroceryStoreApp.subdomains.transactionsmanagementsubdomain.presentationlayer.PurchaseReceiptController;
-import com.example.GroceryStoreApp.subdomains.transactionsmanagementsubdomain.presentationlayer.PurchaseReceiptResponseModel;
+import org.champqcsoft.transactionservice.dataaccesslayer.Client;
+import org.champqcsoft.transactionservice.dataaccesslayer.Employee;
+import org.champqcsoft.transactionservice.dataaccesslayer.Product;
+import org.champqcsoft.transactionservice.dataaccesslayer.PurchaseReceipt;
+import org.champqcsoft.transactionservice.presentationlayer.PurchaseReceiptController;
+import org.champqcsoft.transactionservice.presentationlayer.PurchaseReceiptResponseModel;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -38,15 +38,15 @@ public interface PurchaseReceiptResponseMapper {
     @Mapping(expression = "java(employee.getName())", target = "employeeName")
 
     PurchaseReceiptResponseModel entityToResponseModel(
-            PurchaseReceipt purchaseReceipt,
+            PurchaseReceipt purchaseReceipt/*,
             Client client,
             Product product,
-            Employee employee
+            Employee employee*/
     );
 
 
 
-    @AfterMapping
+    /*@AfterMapping
     default void addLinks(@MappingTarget PurchaseReceiptResponseModel model){
         Link selfLink = linkTo(methodOn(PurchaseReceiptController.class)
                         .getPurchaseReceiptByPurchaseReceiptId(model.getPurchaseReceiptId()))
@@ -59,5 +59,5 @@ public interface PurchaseReceiptResponseMapper {
                         .withRel("all purchaseReceipts");
         model.add(productsLink);
 
-    }
+    }*/
 }

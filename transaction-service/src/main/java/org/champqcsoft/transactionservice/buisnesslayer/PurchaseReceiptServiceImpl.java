@@ -6,9 +6,9 @@ import org.champqcsoft.transactionservice.commons.identifiers.ClientIdentifier;
 import org.champqcsoft.transactionservice.commons.identifiers.EmployeeIdentifier;
 import org.champqcsoft.transactionservice.commons.identifiers.ProductIdentifier;
 import org.champqcsoft.transactionservice.commons.identifiers.PurchaseReceiptIdentifier;
-import com.example.GroceryStoreApp.subdomains.clientmanagementsubdomain.dataaccesslayer.ClientRepository;
-import com.example.GroceryStoreApp.subdomains.employeesmanagementsubdomains.dataaccesslayer.EmployeeRepository;
-import com.example.GroceryStoreApp.subdomains.productsmanagementsubdomain.dataaccesslayer.ProductRepository;
+import org.champqcsoft.transactionservice.domainclientlayer.customers.CustomerServiceClient;
+import org.champqcsoft.transactionservice.domainclientlayer.employees.EmployeeServiceClient;
+import org.champqcsoft.transactionservice.domainclientlayer.products.ProductServiceClient;
 import org.champqcsoft.transactionservice.dataaccesslayer.*;
 import org.champqcsoft.transactionservice.datamapperlayer.PurchaseReceiptRequestMapper;
 import org.champqcsoft.transactionservice.datamapperlayer.PurchaseReceiptResponseMapper;
@@ -30,20 +30,20 @@ public class PurchaseReceiptServiceImpl implements PurchaseReceiptService{
     private final PurchaseReceiptRepository purchaseReceiptRepository;
     //To access database of those 3 repository
     private final CustomerServiceClient clientRepository;
-    private final EmployeeServiceClient productRepository;
-    private final ProductServiceClient employeeRepository;
+    private final EmployeeServiceClient employeeRepository;
+    private final ProductServiceClient productRepository;
 
 
     private final PurchaseReceiptResponseMapper purchaseReceiptResponseMapper;
     private final PurchaseReceiptRequestMapper purchaseReceiptRequestMapper;
 
-    public PurchaseReceiptServiceImpl(PurchaseReceiptRepository purchaseReceiptRepository, CustomerServiceClient clientRepository, EmployeeServiceClient productRepository, ProductServiceClient employeeRepository,
+    public PurchaseReceiptServiceImpl(PurchaseReceiptRepository purchaseReceiptRepository, CustomerServiceClient clientRepository, EmployeeServiceClient employeeRepository, ProductServiceClient productRepository,
                                       PurchaseReceiptResponseMapper purchaseReceiptResponseMapper,
                                       PurchaseReceiptRequestMapper purchaseReceiptRequestMapper) {
         this.purchaseReceiptRepository = purchaseReceiptRepository;
         this.clientRepository = clientRepository;
-        this.productRepository = productRepository;
         this.employeeRepository = employeeRepository;
+        this.productRepository = productRepository;
         this.purchaseReceiptResponseMapper = purchaseReceiptResponseMapper;
         this.purchaseReceiptRequestMapper = purchaseReceiptRequestMapper;
     }
@@ -53,7 +53,7 @@ public class PurchaseReceiptServiceImpl implements PurchaseReceiptService{
         List<PurchaseReceiptResponseModel> purchaseReceiptResponseModels = new ArrayList<>();
         List<PurchaseReceipt> purchaseReceipts = purchaseReceiptRepository.findAll();
 
-        purchaseReceipts.forEach(purchaseReceipt -> {
+        /*purchaseReceipts.forEach(purchaseReceipt -> {
             if(!clientRepository.existsClientByClientIdentifier_ClientId(purchaseReceipt.getClientIdentifier().getClientId()))
                 throw new InvalidInputException("Invalid input for clientId " + purchaseReceipt.getClientIdentifier().getClientId());
             if(!productRepository.existsProductByProductIdentifier_ProductId(purchaseReceipt.getProductIdentifier().getProductId()))
@@ -65,7 +65,7 @@ public class PurchaseReceiptServiceImpl implements PurchaseReceiptService{
                     clientRepository.findClientByClientIdentifier_ClientId(purchaseReceipt.getClientIdentifier().getClientId()),
                     productRepository.findProductByProductIdentifier_ProductId(purchaseReceipt.getProductIdentifier().getProductId()),
                     employeeRepository.findEmployeeByEmployeeIdentifier_EmployeeId(purchaseReceipt.getEmployeeIdentifier().getEmployeeId())));
-        });
+        });*/
 
         return purchaseReceiptResponseModels;
     }
@@ -74,18 +74,24 @@ public class PurchaseReceiptServiceImpl implements PurchaseReceiptService{
     public PurchaseReceiptResponseModel getPurchaseReceiptByPurchaseReceiptIdentifier_purchaseReceiptId(String purchaseReceiptId) {
         if(!purchaseReceiptRepository.existsPurchaseReceiptByPurchaseReceiptIdentifier_PurchaseReceiptId(purchaseReceiptId))
             throw new NotFoundException("Unknown purchaseReceiptId " + purchaseReceiptId);
+
+
         PurchaseReceipt purchaseReceipt = purchaseReceiptRepository.findPurchaseReceiptByPurchaseReceiptIdentifier_PurchaseReceiptId(purchaseReceiptId);
-        if(!clientRepository.existsClientByClientIdentifier_ClientId(purchaseReceipt.getClientIdentifier().getClientId()))
+
+        if(clientRepository.existsClientByClientIdentifier_ClientId(purchaseReceipt.getClientIdentifier().getClientId())==null)
             throw new InvalidInputException("Invalid input for clientId " + purchaseReceipt.getClientIdentifier().getClientId());
-        if(!productRepository.existsProductByProductIdentifier_ProductId(purchaseReceipt.getProductIdentifier().getProductId()))
+        if(employeeRepository.existsEmployeeByEmployeeIdentifier_EmployeeId(purchaseReceipt.getProductIdentifier().getProductId())==null)
             throw new InvalidInputException("Invalid input for productId " + purchaseReceipt.getProductIdentifier().getProductId());
-        if(!employeeRepository.existsEmployeeByEmployeeIdentifier_EmployeeId(purchaseReceipt.getEmployeeIdentifier().getEmployeeId()))
+        if(productRepository.existsProductByProductIdentifier_ProductId(purchaseReceipt.getEmployeeIdentifier().getEmployeeId())==null)
             throw new InvalidInputException("Invalid input for employeeId " + purchaseReceipt.getEmployeeIdentifier().getEmployeeId());
 
-        return purchaseReceiptResponseMapper.entityToResponseModel(purchaseReceipt,
+        return purchaseReceiptResponseMapper.entityToResponseModel(purchaseReceipt);
+
+
+                /*purchaseReceiptResponseMapper.entityToResponseModel(purchaseReceipt,
                 clientRepository.findClientByClientIdentifier_ClientId(purchaseReceipt.getClientIdentifier().getClientId()),
-                productRepository.findProductByProductIdentifier_ProductId(purchaseReceipt.getProductIdentifier().getProductId()),
-                employeeRepository.findEmployeeByEmployeeIdentifier_EmployeeId(purchaseReceipt.getEmployeeIdentifier().getEmployeeId()));
+                employeeRepository.findProductByProductIdentifier_ProductId(purchaseReceipt.getProductIdentifier().getProductId()),
+                productRepository.findEmployeeByEmployeeIdentifier_EmployeeId(purchaseReceipt.getEmployeeIdentifier().getEmployeeId()));*/
 
 
     }
@@ -93,12 +99,12 @@ public class PurchaseReceiptServiceImpl implements PurchaseReceiptService{
     @Override
     public PurchaseReceiptResponseModel createPurchaseReceipt(PurchaseReceiptRequestModel purchaseReceiptRequestModel) {
         //We don't depend on other stuff
-        if(!clientRepository.existsClientByClientIdentifier_ClientId(purchaseReceiptRequestModel.getClientId()))
+        if(clientRepository.existsClientByClientIdentifier_ClientId(purchaseReceiptRequestModel.getClientId())==null)
             throw new InvalidInputException("Invalid input for clientId " + purchaseReceiptRequestModel.getClientId());
-        if(!productRepository.existsProductByProductIdentifier_ProductId(purchaseReceiptRequestModel.getProductId()))
-            throw new InvalidInputException("Invalid input for productId " + purchaseReceiptRequestModel.getProductId());
-        if(!employeeRepository.existsEmployeeByEmployeeIdentifier_EmployeeId(purchaseReceiptRequestModel.getEmployeeId()))
-            throw new InvalidInputException("Invalid input for employeeId " + purchaseReceiptRequestModel.getEmployeeId());
+        if(employeeRepository.existsEmployeeByEmployeeIdentifier_EmployeeId(purchaseReceiptRequestModel.getProductId())==null)
+            throw new InvalidInputException("Invalid input for employeeId " + purchaseReceiptRequestModel.getProductId());
+        if(productRepository.existsProductByProductIdentifier_ProductId(purchaseReceiptRequestModel.getEmployeeId())==null)
+            throw new InvalidInputException("Invalid input for productId " + purchaseReceiptRequestModel.getEmployeeId());
         CurrentDate currentDate = new CurrentDate(
                 purchaseReceiptRequestModel.getTransactionHour(),
                 new Date(
@@ -135,26 +141,26 @@ public class PurchaseReceiptServiceImpl implements PurchaseReceiptService{
                         purchaseReceiptRequestModel.getEmployeeId()
                 )
         );
-
-        clientRepository.findClientByClientIdentifier_ClientId(purchaseReceipt.getClientIdentifier().getClientId()).getMembership().setNumberOfPoints(
+/*
+        clientRepository.findByClientIdentifier_ClientId(purchaseReceipt.getClientIdentifier().getClientId()).getMembership().setNumberOfPoints(
                 clientRepository.findClientByClientIdentifier_ClientId(purchaseReceipt.getClientIdentifier().getClientId()).getMembership().getNumberOfPoints()+1
-        );
+        );*/
 
-        return purchaseReceiptResponseMapper.entityToResponseModel(purchaseReceiptRepository.save(purchaseReceipt),
+        return purchaseReceiptResponseMapper.entityToResponseModel(purchaseReceiptRepository.save(purchaseReceipt)/*
                 clientRepository.findClientByClientIdentifier_ClientId(purchaseReceipt.getClientIdentifier().getClientId()),
-                productRepository.findProductByProductIdentifier_ProductId(purchaseReceipt.getProductIdentifier().getProductId()),
-                employeeRepository.findEmployeeByEmployeeIdentifier_EmployeeId(purchaseReceipt.getEmployeeIdentifier().getEmployeeId()));
+                employeeRepository.findProductByProductIdentifier_ProductId(purchaseReceipt.getProductIdentifier().getProductId()),
+                productRepository.findEmployeeByEmployeeIdentifier_EmployeeId(purchaseReceipt.getEmployeeIdentifier().getEmployeeId())*/);
     }
 
     @Override
     public PurchaseReceiptResponseModel updatePurchaseReceipt(PurchaseReceiptRequestModel purchaseReceiptRequestModel, String purchaseReceiptId) {
         if(!purchaseReceiptRepository.existsPurchaseReceiptByPurchaseReceiptIdentifier_PurchaseReceiptId(purchaseReceiptId))
             throw new NotFoundException("Unknown purchaseReceiptId " + purchaseReceiptId);
-        if(!clientRepository.existsClientByClientIdentifier_ClientId(purchaseReceiptRequestModel.getClientId()))
+        if(clientRepository.existsClientByClientIdentifier_ClientId(purchaseReceiptRequestModel.getClientId())==null)
             throw new InvalidInputException("Invalid input for clientId " + purchaseReceiptRequestModel.getClientId());
-        if(!productRepository.existsProductByProductIdentifier_ProductId(purchaseReceiptRequestModel.getProductId()))
+        if(employeeRepository.existsEmployeeByEmployeeIdentifier_EmployeeId(purchaseReceiptRequestModel.getProductId())==null)
             throw new InvalidInputException("Invalid input for productId " + purchaseReceiptRequestModel.getProductId());
-        if(!employeeRepository.existsEmployeeByEmployeeIdentifier_EmployeeId(purchaseReceiptRequestModel.getEmployeeId()))
+        if(productRepository.existsProductByProductIdentifier_ProductId(purchaseReceiptRequestModel.getEmployeeId())==null)
             throw new InvalidInputException("Invalid input for employeeId " + purchaseReceiptRequestModel.getEmployeeId());
 
 
@@ -196,10 +202,10 @@ public class PurchaseReceiptServiceImpl implements PurchaseReceiptService{
                 )
         );
         updatedPurchaseReceipt.setId(purchaseReceipt.getId());
-        return purchaseReceiptResponseMapper.entityToResponseModel(purchaseReceiptRepository.save(updatedPurchaseReceipt),
+        return purchaseReceiptResponseMapper.entityToResponseModel(purchaseReceiptRepository.save(updatedPurchaseReceipt)/*,
                 clientRepository.findClientByClientIdentifier_ClientId(purchaseReceipt.getClientIdentifier().getClientId()),
-                productRepository.findProductByProductIdentifier_ProductId(purchaseReceipt.getPurchaseReceiptIdentifier().getPurchaseReceiptId()),
-                employeeRepository.findEmployeeByEmployeeIdentifier_EmployeeId(purchaseReceipt.getPurchaseReceiptIdentifier().getPurchaseReceiptId()));
+                employeeRepository.findProductByProductIdentifier_ProductId(purchaseReceipt.getPurchaseReceiptIdentifier().getPurchaseReceiptId()),
+                productRepository.findEmployeeByEmployeeIdentifier_EmployeeId(purchaseReceipt.getPurchaseReceiptIdentifier().getPurchaseReceiptId())*/);
     }
 
     @Transactional
