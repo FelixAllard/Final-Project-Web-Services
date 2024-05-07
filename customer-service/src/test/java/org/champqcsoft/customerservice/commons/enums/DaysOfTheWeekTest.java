@@ -18,10 +18,8 @@ public class DaysOfTheWeekTest {
         assertTrue(containsEnumValue(values, "Friday"));
         assertTrue(containsEnumValue(values, "Saturday"));
         assertTrue(containsEnumValue(values, "Sunday"));
-        // Add more specific tests for your enum values as needed
     }
-
-    // Helper method to check if the enum values contain a specific string
+    //Function used for the testing above!
     private boolean containsEnumValue(DaysOfTheWeek[] values, String value) {
         for (DaysOfTheWeek day : values) {
             if (day.name().equals(value)) {
