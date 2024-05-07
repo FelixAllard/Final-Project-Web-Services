@@ -153,8 +153,9 @@ public class PurchaseReceiptServiceImpl implements PurchaseReceiptService{
 
         return purchaseReceiptResponseMapper.entityToResponseModel(purchaseReceiptRepository.save(purchaseReceipt),
                 clientRepository.findClientByClientIdentifier_ClientId(purchaseReceipt.getClientIdentifier().getClientId()),
-                employeeRepository.findEmployeeByEmployeeIdentifier_EmployeeId(purchaseReceipt.getProductIdentifier().getProductId()),
-                productRepository.findProductByProductIdentifier_ProductId(purchaseReceipt.getEmployeeIdentifier().getEmployeeId()));
+                employeeRepository.findEmployeeByEmployeeIdentifier_EmployeeId(purchaseReceipt.getEmployeeIdentifier().getEmployeeId()),
+                productRepository.findProductByProductIdentifier_ProductId(purchaseReceipt.getProductIdentifier().getProductId())
+        );
     }
 
     @Override
@@ -192,7 +193,9 @@ public class PurchaseReceiptServiceImpl implements PurchaseReceiptService{
         );
         PurchaseReceipt updatedPurchaseReceipt = purchaseReceiptRequestMapper.requestModelToEntity(
                 purchaseReceiptRequestModel,
-                new PurchaseReceiptIdentifier(),
+                new PurchaseReceiptIdentifier(
+                        purchaseReceiptId
+                ),
                 currentDate,
                 price,
                 storeAddress,
