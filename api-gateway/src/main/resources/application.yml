@@ -1,0 +1,38 @@
+spring:
+    application:
+        name: api-gateway
+# Default Spring Profile
+server:
+    error:
+        include-message: always
+
+logging:
+    level:
+        root: INFO
+        com.example: DEBUG
+
+---
+
+# for docker
+
+spring:
+    config:
+        activate:
+            on-profile: docker
+
+
+app:
+    customers-service:
+        host: customer-service
+        port: 7001
+    employees-service:
+        host: employee-service
+        port: 7002
+    products-service:
+        host: product-service
+        port: 7003
+    transaction-service:
+        host: transaction-service
+        port: 7004
+
+server.port: 8080

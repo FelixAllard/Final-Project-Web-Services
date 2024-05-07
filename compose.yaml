@@ -175,3 +175,15 @@ services:
       - 5013:80
     environment:
       - PMA_ARBITRARY=1
+  api-gateway:
+    build: api-gateway
+    hostname: api-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - employee-service
+      - customer-service
+      - product-service
+      - transaction-service
