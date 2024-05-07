@@ -31,7 +31,7 @@ public class CustomerServiceClient {
         this.CUSTOMERS_SERVICE_BASE_URL = "http://" + customerServiceHost + ":" + customerServicePort + "/api/v1/clients";
     }
 
-    public ClientsModel existsClientByClientIdentifier_ClientId(String customerId){
+    public ClientsModel findClientByClientIdentifier_ClientId(String customerId){
         try{
             String url = CUSTOMERS_SERVICE_BASE_URL + "/" + customerId;
 

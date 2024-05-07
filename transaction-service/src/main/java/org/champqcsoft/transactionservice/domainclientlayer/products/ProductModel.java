@@ -6,8 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
 @Builder
@@ -24,8 +22,8 @@ public class ProductModel {
     private int month;
     private int year;
     private String productAvailability;
-    private double value;
-    private String currency;
+    private double valueProduct;
+    private String currencyProduct;
     private String categoryName;
     private String categoryDescription;
     private String url;

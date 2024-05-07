@@ -30,7 +30,7 @@ public class EmployeeServiceClient {
         this.EMPLOYEES_SERVICE_BASE_URL = "http://" + employeeServiceHost + ":" + employeeServicePort + "/api/v1/employees";
     }
 
-    public EmployeeModel existsEmployeeByEmployeeIdentifier_EmployeeId(String employeeId){
+    public EmployeeModel findEmployeeByEmployeeIdentifier_EmployeeId(String employeeId){
         try{
             String url = EMPLOYEES_SERVICE_BASE_URL + "/" + employeeId;
 

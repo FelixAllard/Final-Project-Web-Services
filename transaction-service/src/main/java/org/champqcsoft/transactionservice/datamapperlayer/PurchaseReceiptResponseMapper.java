@@ -1,9 +1,11 @@
 package org.champqcsoft.transactionservice.datamapperlayer;
 
-import org.champqcsoft.transactionservice.dataaccesslayer.Client;
-import org.champqcsoft.transactionservice.dataaccesslayer.Employee;
-import org.champqcsoft.transactionservice.dataaccesslayer.Product;
 import org.champqcsoft.transactionservice.dataaccesslayer.PurchaseReceipt;
+import org.champqcsoft.transactionservice.domainclientlayer.customers.ClientsModel;
+
+import org.champqcsoft.transactionservice.domainclientlayer.employees.EmployeeModel;
+
+import org.champqcsoft.transactionservice.domainclientlayer.products.ProductModel;
 import org.champqcsoft.transactionservice.presentationlayer.PurchaseReceiptController;
 import org.champqcsoft.transactionservice.presentationlayer.PurchaseReceiptResponseModel;
 import org.mapstruct.AfterMapping;
@@ -11,6 +13,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.springframework.hateoas.Link;
+
+import java.util.List;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -37,11 +41,14 @@ public interface PurchaseReceiptResponseMapper {
     @Mapping(expression = "java(employee.getEmployeeIdentifier().getEmployeeId())", target = "employeeId")
     @Mapping(expression = "java(employee.getName())", target = "employeeName")
 
+
+
     PurchaseReceiptResponseModel entityToResponseModel(
-            PurchaseReceipt purchaseReceipt/*,
-            Client client,
-            Product product,
-            Employee employee*/
+            PurchaseReceipt purchaseReceipt,
+            ClientsModel client,
+            EmployeeModel employee,
+            ProductModel product
+
     );
 
 

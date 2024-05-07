@@ -30,7 +30,7 @@ public class ProductServiceClient {
         this.PRODUCTS_SERVICE_BASE_URL = "http://" + productServiceHost + ":" + productServicePort + "/api/v1/products";
     }
 
-    public ProductModel existsProductByProductIdentifier_ProductId(String productId) {
+    public ProductModel findProductByProductIdentifier_ProductId(String productId) {
         try {
             String url = PRODUCTS_SERVICE_BASE_URL + "/" + productId;
 

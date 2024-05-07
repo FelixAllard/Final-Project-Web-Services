@@ -25,6 +25,6 @@ public class ClientsModel {
     private double totalSpent;
     private int numberOfPoints;
     private String membershipStatus;
-    private double value;
-    private String currency;
+    private double valueClients;
+    private String currencyClients;
 }
