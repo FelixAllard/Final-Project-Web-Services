@@ -34,11 +34,11 @@ public interface PurchaseReceiptResponseMapper {
     @Mapping(expression = "java(purchaseReceipt.getStoreAddress().getState())", target = "state")
     @Mapping(expression = "java(purchaseReceipt.getStoreAddress().getPostalCode())", target = "postalCode")
     @Mapping(expression = "java(purchaseReceipt.getStoreAddress().getCountry())", target = "country")
-    @Mapping(expression = "java(client.getClientIdentifier().getClientId())", target = "clientId")
+    @Mapping(expression = "java(client.getClientId())", target = "clientId")
     @Mapping(expression = "java(client.getName())", target = "clientName")
-    @Mapping(expression = "java(product.getProductIdentifier().getProductId())", target = "productId")
+    @Mapping(expression = "java(product.getProductId())", target = "productId")
     @Mapping(expression = "java(product.getName())", target = "productName")
-    @Mapping(expression = "java(employee.getEmployeeIdentifier().getEmployeeId())", target = "employeeId")
+    @Mapping(expression = "java(employee.getEmployeeId())", target = "employeeId")
     @Mapping(expression = "java(employee.getName())", target = "employeeName")
 
 
