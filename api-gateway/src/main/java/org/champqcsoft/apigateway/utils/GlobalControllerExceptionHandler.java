@@ -1,9 +1,9 @@
 package org.champqcsoft.apigateway.utils;
 
-import com.example.GroceryStoreApp.utils.exceptions.InUseException;
-import com.example.GroceryStoreApp.utils.exceptions.InvalidInputException;
-import com.example.GroceryStoreApp.utils.exceptions.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
+import org.champqcsoft.apigateway.utils.exceptions.InUseException;
+import org.champqcsoft.apigateway.utils.exceptions.InvalidInputException;
+import org.champqcsoft.apigateway.utils.exceptions.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
