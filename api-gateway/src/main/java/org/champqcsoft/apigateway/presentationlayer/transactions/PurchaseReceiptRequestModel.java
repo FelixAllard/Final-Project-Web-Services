@@ -10,20 +10,20 @@ import lombok.NoArgsConstructor;
 public class PurchaseReceiptRequestModel {
     private String purchaseReceiptId;
 
-    private String clientIdTransaction;
-    private String productIdTransaction;
-    private String employeeIdTransaction;
+    private String clientId;
+    private String productId;
+    private String employeeId;
 
-    private double amountTransaction;
-    private int transactionHourTransaction;
-    private int dayTransaction;
-    private int monthTransaction;
-    private int yearTransaction;
-    private double valueTransaction;
-    private String currencyTransaction;
-    private String streetTransaction;
-    private String cityTransaction;
-    private String stateTransaction;
-    private String postalCodeTransaction;
-    private String countryTransaction;
+    private double amount;
+    private int transactionHour;
+    private int day;
+    private int month;
+    private int year;
+    private double value;
+    private String currency;
+    private String street;
+    private String city;
+    private String state;
+    private String postalCode;
+    private String country;
 }

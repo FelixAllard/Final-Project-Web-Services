@@ -19,19 +19,9 @@ public class PurchaseReceiptServiceImpl implements PurchaseReceiptService {
     private final PurchaseReceiptResponseMapper transactionResponseMapper;
 
 
-    private final CustomerServiceClient customerServiceClient;
-    private final EmployeeServiceClient employeeServiceClient;
-    private final ProductServiceClient productServiceClient;
-
     public PurchaseReceiptServiceImpl(TransactionServiceClient transactionServiceClient,
-                                      CustomerServiceClient customerServiceClient,
-                                        EmployeeServiceClient employeeServiceClient,
-                                        ProductServiceClient productServiceClient,
                                       PurchaseReceiptResponseMapper orderResponseMapper) {
         this.transactionServiceClient = transactionServiceClient;
-        this.customerServiceClient = customerServiceClient;
-        this.employeeServiceClient = employeeServiceClient;
-        this.productServiceClient = productServiceClient;
 
         this.transactionResponseMapper = orderResponseMapper;
     }
@@ -44,10 +34,7 @@ public class PurchaseReceiptServiceImpl implements PurchaseReceiptService {
         List<PurchaseReceiptResponseModel> purchaseReceipts = transactionServiceClient.getAllTransactions();
 
         purchaseReceipts.forEach(purchaseReceipt -> {
-            purchaseReceiptResponseModels.add(transactionResponseMapper.entityToResponseModel(purchaseReceipt,
-                            customerServiceClient.findClientByClientIdentifier_ClientId(purchaseReceipt.getClientIdTransaction()),
-                            employeeServiceClient.findEmployeeByEmployeeIdentifier_EmployeeId(purchaseReceipt.getEmployeeIdTransaction()),
-                            productServiceClient.findProductByProductIdentifier_ProductId(purchaseReceipt.getProductIdTransaction())
+            purchaseReceiptResponseModels.add(transactionResponseMapper.entityToResponseModel(purchaseReceipt
                     )
             );
         });
@@ -59,10 +46,7 @@ public class PurchaseReceiptServiceImpl implements PurchaseReceiptService {
         PurchaseReceiptResponseModel purchaseReceiptResponseModel = transactionServiceClient.getTransactionByTransactionId(purchaseReceiptId);
 
 
-        return transactionResponseMapper.entityToResponseModel(purchaseReceiptResponseModel,
-                customerServiceClient.findClientByClientIdentifier_ClientId(purchaseReceiptResponseModel.getClientIdTransaction()),
-                employeeServiceClient.findEmployeeByEmployeeIdentifier_EmployeeId(purchaseReceiptResponseModel.getEmployeeIdTransaction()),
-                productServiceClient.findProductByProductIdentifier_ProductId(purchaseReceiptResponseModel.getProductIdTransaction())
+        return transactionResponseMapper.entityToResponseModel(purchaseReceiptResponseModel
         );
     }
 
@@ -73,10 +57,7 @@ public class PurchaseReceiptServiceImpl implements PurchaseReceiptService {
 
 
         return transactionResponseMapper.entityToResponseModel(
-                purchaseReceiptResponseModel,
-                customerServiceClient.findClientByClientIdentifier_ClientId(purchaseReceiptRequestModel.getClientIdTransaction()),
-                employeeServiceClient.findEmployeeByEmployeeIdentifier_EmployeeId(purchaseReceiptRequestModel.getEmployeeIdTransaction()),
-                productServiceClient.findProductByProductIdentifier_ProductId(purchaseReceiptRequestModel.getProductIdTransaction())
+                purchaseReceiptResponseModel
         );
     }
 
@@ -87,10 +68,7 @@ public class PurchaseReceiptServiceImpl implements PurchaseReceiptService {
                 purchaseReceiptId
         );
         return transactionResponseMapper.entityToResponseModel(
-                purchaseReceiptResponseModel,
-                customerServiceClient.findClientByClientIdentifier_ClientId(purchaseReceiptRequestModel.getClientIdTransaction()),
-                employeeServiceClient.findEmployeeByEmployeeIdentifier_EmployeeId(purchaseReceiptRequestModel.getEmployeeIdTransaction()),
-                productServiceClient.findProductByProductIdentifier_ProductId(purchaseReceiptRequestModel.getProductIdTransaction())
+                purchaseReceiptResponseModel
         );
     }
 

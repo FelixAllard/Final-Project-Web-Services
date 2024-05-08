@@ -34,7 +34,7 @@ public class TransactionServiceClient {
                               @Value("${app.transaction-service.port}") String transactionServicePort) {
         this.restTemplate = restTemplate;
         this.mapper = mapper;
-        this.TRANSACTION_SERVICE_BASE_URL = "http://" + transactionServiceHost + ":" + transactionServicePort + "/api/v1/transactions";
+        this.TRANSACTION_SERVICE_BASE_URL = "http://" + transactionServiceHost + ":" + transactionServicePort + "/api/v1/purchaseReceipts";
     }
 
     public List<PurchaseReceiptResponseModel> getAllTransactions() {

@@ -13,17 +13,17 @@ import lombok.NoArgsConstructor;
 public class ClientRequestModel {
     private String clientId;
 
-    private String nameClient;
-    private String emailClient;
-    private String phoneClient;
-    private String streetClient;
-    private String cityClient;
-    private String stateClient;
-    private String postalCodeClient;
-    private String countryClient;
-    private double totalSpentClient;
-    private int numberOfPointsClient;
-    private String membershipStatusClient;
-    private double valueClient;
-    private String currencyClient;
+    private String name;
+    private String email;
+    private String phone;
+    private String street;
+    private String city;
+    private String state;
+    private String postalCode;
+    private String country;
+    private double totalSpent;
+    private int numberOfPoints;
+    private String membershipStatus;
+    private double value;
+    private String currency;
 }

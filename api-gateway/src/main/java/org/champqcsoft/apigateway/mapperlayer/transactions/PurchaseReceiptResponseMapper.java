@@ -1,29 +1,21 @@
 package org.champqcsoft.apigateway.mapperlayer.transactions;
 
-import org.champqcsoft.apigateway.mapperlayer.products.ProductResponseMapper;
-import org.champqcsoft.apigateway.presentationlayer.customers.ClientResponseModel;
-import org.champqcsoft.apigateway.presentationlayer.employees.EmployeeResponseModel;
-import org.champqcsoft.apigateway.presentationlayer.products.ProductResponseModel;
+import org.champqcsoft.apigateway.presentationlayer.transactions.PurchaseReceiptController;
 import org.champqcsoft.apigateway.presentationlayer.transactions.PurchaseReceiptResponseModel;
 
+import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.springframework.hateoas.Link;
 
-import java.util.List;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Mapper(componentModel = "spring")
 public interface PurchaseReceiptResponseMapper {
-    PurchaseReceiptResponseModel entityToResponseModel(
-            PurchaseReceiptResponseModel purchaseReceipt,
-            ClientResponseModel client,
-            EmployeeResponseModel employee,
-            ProductResponseModel product
-    );
+    PurchaseReceiptResponseModel entityToResponseModel(PurchaseReceiptResponseModel purchaseReceipt);
 
-
-
-
-    /*@AfterMapping
+    @AfterMapping
     default void addLinks(@MappingTarget PurchaseReceiptResponseModel model){
         Link selfLink = linkTo(methodOn(PurchaseReceiptController.class)
                         .getPurchaseReceiptByPurchaseReceiptId(model.getPurchaseReceiptId()))
@@ -36,5 +28,5 @@ public interface PurchaseReceiptResponseMapper {
                         .withRel("all purchaseReceipts");
         model.add(productsLink);
 
-    }*/
+    }
 }
