@@ -1,7 +1,6 @@
 package org.champqcsoft.apigateway.mapperlayer.customers;
 
 
-import org.champqcsoft.apigateway.*
 import org.champqcsoft.apigateway.presentationlayer.customers.ClientController;
 import org.champqcsoft.apigateway.presentationlayer.customers.ClientResponseModel;
 import org.mapstruct.AfterMapping;

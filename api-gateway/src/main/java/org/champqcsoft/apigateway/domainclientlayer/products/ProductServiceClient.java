@@ -2,9 +2,9 @@ package org.champqcsoft.apigateway.domainclientlayer.products;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.champqcsoft.transactionservice.utils.HttpErrorInfo;
-import org.champqcsoft.transactionservice.utils.exceptions.InvalidInputException;
-import org.champqcsoft.transactionservice.utils.exceptions.NotFoundException;
+import org.champqcsoft.apigateway.utils.HttpErrorInfo;
+import org.champqcsoft.apigateway.utils.exceptions.InvalidInputException;
+import org.champqcsoft.apigateway.utils.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
