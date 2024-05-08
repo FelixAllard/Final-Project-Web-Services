@@ -13,20 +13,20 @@ import org.springframework.hateoas.RepresentationModel;
 public class EmployeeResponseModel extends RepresentationModel<EmployeeResponseModel> {
     private String employeeId;
 
-    private String name;
-    private int age;
-    private String currentEmploymentStatus;
-    private Boolean fullDay;
-    private int startDay;
-    private int startMonth;
-    private int startYear;
-    private int endDay;
-    private int endMonth;
-    private int endYear;
-    private String reason;
-    private String daysOfTheWeek;
-    private double value;
-    private String currency;
-    private String paymentMethod;
+    private String nameEmployee;
+    private int ageEmployee;
+    private String currentEmploymentStatusEmployee;
+    private Boolean fullDayEmployee;
+    private int startDayEmployee;
+    private int startMonthEmployee;
+    private int startYearEmployee;
+    private int endDayEmployee;
+    private int endMonthEmployee;
+    private int endYearEmployee;
+    private String reasonEmployee;
+    private String daysOfTheWeekEmployee;
+    private double valueEmployee;
+    private String currencyEmployee;
+    private String paymentMethodEmployee;
 
 }

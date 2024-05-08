@@ -58,7 +58,7 @@ public class ClientServiceImpl implements ClientService{
                 clientRequestModel.getState(),
                 clientRequestModel.getPostalCode(),
                 clientRequestModel.getCountry()
-                );
+        );
         Membership membership = new Membership(
                 clientRequestModel.getTotalSpent(),
                 clientRequestModel.getNumberOfPoints(),

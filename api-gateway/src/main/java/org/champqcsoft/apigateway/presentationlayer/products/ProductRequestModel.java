@@ -10,18 +10,18 @@ import lombok.NoArgsConstructor;
 public class ProductRequestModel {
     private String productId;
 
-    private String name;
-    private String description;
-    private int palletId;
-    private  String manufacturer;
-    private int day;
-    private int month;
-    private int year;
-    private String productAvailability;
-    private double value;
-    private String currency;
-    private String categoryName;
-    private String categoryDescription;
-    private String url;
-    private String altText;
+    private String nameProduct;
+    private String descriptionProduct;
+    private int palletIdProduct;
+    private  String manufacturerProduct;
+    private int dayProduct;
+    private int monthProduct;
+    private int yearProduct;
+    private String productAvailabilityProduct;
+    private double valueProduct;
+    private String currencyProduct;
+    private String categoryNameProduct;
+    private String categoryDescriptionProduct;
+    private String urlProduct;
+    private String altTextProduct;
 }

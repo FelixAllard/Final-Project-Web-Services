@@ -17,6 +17,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @Mapper(componentModel = "spring")
 public interface ClientResponseMapper {
 
+
     ClientResponseModel entityToResponseModel(ClientResponseModel client);
 
     List<ClientResponseModel> entityListToResponseModelList(List<ClientResponseModel> clients);

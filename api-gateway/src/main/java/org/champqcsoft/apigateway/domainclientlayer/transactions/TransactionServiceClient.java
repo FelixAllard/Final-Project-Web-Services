@@ -30,8 +30,8 @@ public class TransactionServiceClient {
     private final String TRANSACTION_SERVICE_BASE_URL;
 
     public TransactionServiceClient(RestTemplate restTemplate, ObjectMapper mapper,
-                              @Value("${app.transactions-service.host}") String transactionServiceHost,
-                              @Value("${app.transactions-service.port}") String transactionServicePort) {
+                              @Value("${app.transaction-service.host}") String transactionServiceHost,
+                              @Value("${app.transaction-service.port}") String transactionServicePort) {
         this.restTemplate = restTemplate;
         this.mapper = mapper;
         this.TRANSACTION_SERVICE_BASE_URL = "http://" + transactionServiceHost + ":" + transactionServicePort + "/api/v1/transactions";
@@ -110,8 +110,6 @@ public class TransactionServiceClient {
         if (ex.getStatusCode() == UNPROCESSABLE_ENTITY) {
             return new InvalidInputException(getErrorMessage(ex));
         }
-        log.warn("Got an unexpected HTTP error: {}, will rethrow it", new HttpStatusCode[]{ex.getStatusCode()});
-        log.warn("Error body: {}", new String[]{ex.getResponseBodyAsString()});
         return ex;
     }
 

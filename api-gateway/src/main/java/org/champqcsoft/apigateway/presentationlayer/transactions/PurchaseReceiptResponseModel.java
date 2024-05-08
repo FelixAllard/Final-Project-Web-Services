@@ -14,23 +14,23 @@ public class PurchaseReceiptResponseModel extends RepresentationModel<PurchaseRe
     private String purchaseReceiptId;
 
 
-    private String clientId;
-    private String clientName;
-    private String productId;
-    private String productName;
-    private String employeeId;
-    private String employeeName;
+    private String clientIdTransaction;
+    private String clientNameTransaction;
+    private String productIdTransaction;
+    private String productNameTransaction;
+    private String employeeIdTransaction;
+    private String employeeNameTransaction;
 
-    private double amount;
-    private int transactionHour;
-    private int day;
-    private int month;
-    private int year;
-    private double value;
-    private String currency;
-    private String street;
-    private String city;
-    private String state;
-    private String postalCode;
-    private String country;
+    private double amountTransaction;
+    private int transactionHourTransaction;
+    private int dayTransaction;
+    private int monthTransaction;
+    private int yearTransaction;
+    private double valueTransaction;
+    private String currencyTransaction;
+    private String streetTransaction;
+    private String cityTransaction;
+    private String stateTransaction;
+    private String postalCodeTransaction;
+    private String countryTransaction;
 }

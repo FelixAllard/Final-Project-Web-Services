@@ -45,9 +45,9 @@ public class PurchaseReceiptServiceImpl implements PurchaseReceiptService {
 
         purchaseReceipts.forEach(purchaseReceipt -> {
             purchaseReceiptResponseModels.add(transactionResponseMapper.entityToResponseModel(purchaseReceipt,
-                            customerServiceClient.findClientByClientIdentifier_ClientId(purchaseReceipt.getClientId()),
-                            employeeServiceClient.findEmployeeByEmployeeIdentifier_EmployeeId(purchaseReceipt.getEmployeeId()),
-                            productServiceClient.findProductByProductIdentifier_ProductId(purchaseReceipt.getProductId())
+                            customerServiceClient.findClientByClientIdentifier_ClientId(purchaseReceipt.getClientIdTransaction()),
+                            employeeServiceClient.findEmployeeByEmployeeIdentifier_EmployeeId(purchaseReceipt.getEmployeeIdTransaction()),
+                            productServiceClient.findProductByProductIdentifier_ProductId(purchaseReceipt.getProductIdTransaction())
                     )
             );
         });
@@ -60,9 +60,9 @@ public class PurchaseReceiptServiceImpl implements PurchaseReceiptService {
 
 
         return transactionResponseMapper.entityToResponseModel(purchaseReceiptResponseModel,
-                customerServiceClient.findClientByClientIdentifier_ClientId(purchaseReceiptResponseModel.getClientId()),
-                employeeServiceClient.findEmployeeByEmployeeIdentifier_EmployeeId(purchaseReceiptResponseModel.getEmployeeId()),
-                productServiceClient.findProductByProductIdentifier_ProductId(purchaseReceiptResponseModel.getProductId())
+                customerServiceClient.findClientByClientIdentifier_ClientId(purchaseReceiptResponseModel.getClientIdTransaction()),
+                employeeServiceClient.findEmployeeByEmployeeIdentifier_EmployeeId(purchaseReceiptResponseModel.getEmployeeIdTransaction()),
+                productServiceClient.findProductByProductIdentifier_ProductId(purchaseReceiptResponseModel.getProductIdTransaction())
         );
     }
 
@@ -74,9 +74,9 @@ public class PurchaseReceiptServiceImpl implements PurchaseReceiptService {
 
         return transactionResponseMapper.entityToResponseModel(
                 purchaseReceiptResponseModel,
-                customerServiceClient.findClientByClientIdentifier_ClientId(purchaseReceiptRequestModel.getClientId()),
-                employeeServiceClient.findEmployeeByEmployeeIdentifier_EmployeeId(purchaseReceiptRequestModel.getEmployeeId()),
-                productServiceClient.findProductByProductIdentifier_ProductId(purchaseReceiptRequestModel.getProductId())
+                customerServiceClient.findClientByClientIdentifier_ClientId(purchaseReceiptRequestModel.getClientIdTransaction()),
+                employeeServiceClient.findEmployeeByEmployeeIdentifier_EmployeeId(purchaseReceiptRequestModel.getEmployeeIdTransaction()),
+                productServiceClient.findProductByProductIdentifier_ProductId(purchaseReceiptRequestModel.getProductIdTransaction())
         );
     }
 
@@ -88,9 +88,9 @@ public class PurchaseReceiptServiceImpl implements PurchaseReceiptService {
         );
         return transactionResponseMapper.entityToResponseModel(
                 purchaseReceiptResponseModel,
-                customerServiceClient.findClientByClientIdentifier_ClientId(purchaseReceiptRequestModel.getClientId()),
-                employeeServiceClient.findEmployeeByEmployeeIdentifier_EmployeeId(purchaseReceiptRequestModel.getEmployeeId()),
-                productServiceClient.findProductByProductIdentifier_ProductId(purchaseReceiptRequestModel.getProductId())
+                customerServiceClient.findClientByClientIdentifier_ClientId(purchaseReceiptRequestModel.getClientIdTransaction()),
+                employeeServiceClient.findEmployeeByEmployeeIdentifier_EmployeeId(purchaseReceiptRequestModel.getEmployeeIdTransaction()),
+                productServiceClient.findProductByProductIdentifier_ProductId(purchaseReceiptRequestModel.getProductIdTransaction())
         );
     }
 
