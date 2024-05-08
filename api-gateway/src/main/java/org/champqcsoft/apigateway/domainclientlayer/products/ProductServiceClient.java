@@ -2,15 +2,21 @@ package org.champqcsoft.apigateway.domainclientlayer.products;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.champqcsoft.apigateway.presentationlayer.products.ProductRequestModel;
+import org.champqcsoft.apigateway.presentationlayer.products.ProductResponseModel;
+import org.champqcsoft.apigateway.presentationlayer.products.ProductResponseModel;
 import org.champqcsoft.apigateway.utils.HttpErrorInfo;
 import org.champqcsoft.apigateway.utils.exceptions.InvalidInputException;
 import org.champqcsoft.apigateway.utils.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
@@ -30,28 +36,74 @@ public class ProductServiceClient {
         this.PRODUCTS_SERVICE_BASE_URL = "http://" + productServiceHost + ":" + productServicePort + "/api/v1/products";
     }
 
-    public ProductModel findProductByProductIdentifier_ProductId(String productId) {
-        try {
+    public List<ProductResponseModel> getAllProducts(){
+        try{
+            String url = PRODUCTS_SERVICE_BASE_URL;
+            ProductResponseModel[] productResponseModels = restTemplate.getForObject(url, ProductResponseModel[].class);
+            return Arrays.asList(productResponseModels);
+        }
+        catch(HttpClientErrorException ex){
+            throw handleHttpClientException(ex);
+        }
+    }
+    public ProductResponseModel findProductByProductIdentifier_ProductId(String productId){
+        try{
             String url = PRODUCTS_SERVICE_BASE_URL + "/" + productId;
 
-            ProductModel productModel = restTemplate.getForObject(url, ProductModel.class);
+            ProductResponseModel productModel = restTemplate.getForObject(url, ProductResponseModel.class);
 
             return productModel;
-        } catch (HttpClientErrorException ex) {
+        }
+        catch(HttpClientErrorException ex){
             throw handleHttpClientException(ex);
         }
     }
 
-    public void updateProductByProductId(String productId) {
-        try {
+
+    public ProductResponseModel createProduct(ProductRequestModel productRequestModel){
+        try{
+            String url = PRODUCTS_SERVICE_BASE_URL;
+
+            ProductResponseModel productResponseModel = restTemplate.postForObject(url, productRequestModel, ProductResponseModel.class);
+
+            return productResponseModel;
+        }
+        catch(HttpClientErrorException ex){
+            throw handleHttpClientException(ex);
+        }
+    }
+    public ProductResponseModel updateProductByProduct_Id(ProductRequestModel productRequestModel, String productId){
+        try{
             String url = PRODUCTS_SERVICE_BASE_URL + "/" + productId;
 
-            restTemplate.put(url, ProductModel.class);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+
+            HttpEntity<ProductRequestModel> requestEntity = new HttpEntity<>(productRequestModel, headers);
+            ResponseEntity<ProductResponseModel> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, requestEntity, ProductResponseModel.class);
+
+            if (responseEntity.getStatusCode().is2xxSuccessful()) {
+                return responseEntity.getBody();
+            } else {
+                throw new RuntimeException("Update failed with HTTP status code: " + responseEntity.getStatusCodeValue());
+            }
         }
-        catch (HttpClientErrorException ex) {
+        catch(HttpClientErrorException ex){
             throw handleHttpClientException(ex);
         }
     }
+
+    public void deleteProductByProduct_Id(String productId){
+        try{
+            String url = PRODUCTS_SERVICE_BASE_URL + "/" + productId;
+
+            restTemplate.delete(url);
+        }
+        catch(HttpClientErrorException ex){
+            throw handleHttpClientException(ex);
+        }
+    }
+    
 
     private RuntimeException handleHttpClientException(HttpClientErrorException ex) {
         // include all possible responses from the client
