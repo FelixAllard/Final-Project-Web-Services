@@ -2,6 +2,7 @@ package org.champqcsoft.employeeservice.dataaccesslayer;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.champqcsoft.employeeservice.commons.enums.CurrentEmploymentStatus;
@@ -10,6 +11,7 @@ import org.champqcsoft.employeeservice.commons.identifiers.EmployeeIdentifier;
 @Entity
 @Table(name = "employees")
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 public class Employee {
     @Id

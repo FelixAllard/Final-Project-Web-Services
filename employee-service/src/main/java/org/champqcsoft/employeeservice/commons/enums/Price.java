@@ -1,6 +1,7 @@
 package org.champqcsoft.employeeservice.commons.enums;
 
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -13,6 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class Price {
+    @Column(name = "\"value\"")
     private double value;
     @Enumerated(EnumType.STRING)
     private Currency currency;

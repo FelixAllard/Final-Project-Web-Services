@@ -1,7 +1,10 @@
-package org.champqcsoft.customerservice.commons.enums;
+package org.champqcsoft.employeeservice.enums;
 
+import org.champqcsoft.employeeservice.commons.enums.PaymentMethod;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PaymentMethodTest {
 

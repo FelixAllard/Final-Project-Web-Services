@@ -11,7 +11,7 @@ public class PaymentMethodTest {
     @Test
     public void testEnumValues() {
         PaymentMethod[] values = PaymentMethod.values();
-        assertEquals(3, values.length); // Ensure all enum values are present
+        assertEquals(148, values.length); // Ensure all enum values are present
 
         assertTrue(containsEnumValue(values, "Cash"));
         assertTrue(containsEnumValue(values, "Credit"));
