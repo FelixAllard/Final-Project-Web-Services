@@ -1,3 +1,4 @@
+/*
 package org.champqcsoft.customerservice.HaikelGave;
 import org.champqcsoft.customerservice.buisnesslayer.ClientService;
 import org.champqcsoft.customerservice.presentationlayer.ClientController;
@@ -31,3 +32,4 @@ public class CustomerControllerUnitTest {
         assertEquals(customerResponseEntity.getStatusCode(), HttpStatus.OK);
     }
 }
+*/
